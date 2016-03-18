@@ -17,4 +17,5 @@
 //= require angular-resource/angular-resource.min.js
 //= require bootstrap/dist/js/bootstrap.min
 //= require ngGallery/src/js/ngGallery
+//= require jquery-fileupload
 //= require_tree .

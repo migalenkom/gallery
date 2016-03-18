@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-
-
 gem 'rails', '4.2.6'
 gem 'mysql2'
 gem 'pry-rails'
@@ -14,6 +12,9 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'mini_magick'
+gem 'simple_form'
+gem 'jquery-fileupload-rails', '0.4.0'
+gem 'bootstrap-sass', '~> 3.2'
 
 group :development, :test do
   gem 'byebug'
@@ -24,4 +25,3 @@ group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
-

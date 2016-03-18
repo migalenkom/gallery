@@ -1,5 +1,5 @@
 class ImageGallery < ActiveRecord::Base
 
-  has_many :pictures, :dependent => :destroy
+  has_many :pictures, :dependent => :destroy, as: :imageable
 
 end

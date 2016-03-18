@@ -11,8 +11,10 @@
  * file per style scope.
  *
  *= require bootstrap/dist/css/bootstrap.min.css
+ *= require sass-bootstrap-glyphicons/scss/bootstrap-glyphicons
  *= require ngGallery/src/css/ngGallery
  *= require font-awesome/scss/font-awesome
+ *= require jquery.fileupload-ui
  *= require_tree .
  *= require_self
  */
