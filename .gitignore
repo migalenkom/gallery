@@ -15,6 +15,7 @@
 /vendor/bundle/
 /vendor/ruby/
 /vendor/assets/bower_components/
+/public/uploads/
 
 # minimal Rails specific artifacts
 db/*.sqlite3

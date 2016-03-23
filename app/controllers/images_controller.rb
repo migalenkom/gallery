@@ -1,14 +1,14 @@
 class ImagesController < ApplicationController
 
   def index
-    @images = Image.all
+    @imageable = find_imageable
+    @images = @imageable.images
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @images.map { |image| image.to_jq_upload } }
+      format.json { render json: @images.map { |image| image.to_jq_upload(params[:image_gallery_id]) } }
     end
   end
-
 
   def show
     @image = Image.find(params[:id])
@@ -20,8 +20,9 @@ class ImagesController < ApplicationController
   end
 
   def new
+    @imageable = find_imageable
+    @images = @imageable.images
     @image = Image.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @image }
@@ -33,22 +34,20 @@ class ImagesController < ApplicationController
   end
 
   def create
-    @image = Image.new(image_params)
+    @imageable = find_imageable
 
+    @imageable.update_attributes(cover_id: @imageable.images.first.id) if @imageable.cover.blank? && @imageable.images.first.present?
+
+    @image = @imageable.images.build(image_params)
     respond_to do |format|
       if @image.save
 
-        # @user = User.find(session[:user_id])
-        # if @user.present?
-        #   @user.uploads << @upload
-        #   @user.save
-        # end
         format.html {
-          render :json => [@image.to_jq_upload].to_json,
+          render :json => [@image.to_jq_upload(params[:image_gallery_id])].to_json,
                  :content_type => 'text/html',
                  :layout => false
         }
-        format.json { render :json => [@image.to_jq_upload].to_json }
+        format.json { render :json => [@image.to_jq_upload(params[:image_gallery_id])].to_json }
       else
         format.html { render action: "new" }
         format.json { render json: @image.errors, status: :unprocessable_entity }
@@ -85,6 +84,17 @@ class ImagesController < ApplicationController
 
   def image_params
     params.require(:image).permit(:name)
+  end
+
+  private
+
+  def find_imageable
+    params.each do |name, value|
+      if name =~ /(.+)_id$/
+        return $1.classify.constantize.find(value)
+      end
+    end
+    nil
   end
 
 end

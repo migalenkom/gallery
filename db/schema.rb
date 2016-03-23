@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20160316133143) do
 
   create_table "image_galleries", force: :cascade do |t|
-    t.string   "cover",       limit: 255
+    t.integer  "cover_id",    limit: 4
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
     t.datetime "created_at",              null: false
